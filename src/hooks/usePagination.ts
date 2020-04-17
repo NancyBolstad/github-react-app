@@ -5,17 +5,17 @@ function usePagination(data: Item[], itemsPerPage: number) {
   const [currentPage, setCurrentPage] = useState(1);
   const maxPage = Math.ceil(data.length / itemsPerPage);
 
-  function currentData() {
+  function currentData(): Item[] {
     const begin = (currentPage - 1) * itemsPerPage;
     const end = begin + itemsPerPage;
     return data.slice(begin, end);
   }
 
-  function next() {
+  function next(): void {
     setCurrentPage(currentPage => Math.min(currentPage + 1, maxPage));
   }
 
-  function prev() {
+  function prev(): void {
     setCurrentPage(currentPage => Math.max(currentPage - 1, 1));
   }
 
