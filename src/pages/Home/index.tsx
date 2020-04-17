@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Item } from '../../types/data';
 import Typography from '../../components/Typography';
 import MainContent from '../../components/MainContent';
 import { Context } from '../../context/GlobalContext';
 import Loader from '../../components/Loader';
+import usePagination from '../../hooks/usePagination';
 
 interface Props {}
 
@@ -32,27 +32,10 @@ const TableHeader = styled.th`
 export const Home: React.FunctionComponent<Props> = () => {
   const localContext = React.useContext(Context);
   const pageSize = 20;
-  const [totalPage, setTotalPage] = React.useState(0);
-  const [data, setData] = React.useState<Item[]>([]);
-  const [pageNumber, setPageNumber] = React.useState(1);
-
-  function pagination() {
-    const startIndex = (pageNumber - 1) * pageSize;
-    const endIndex = pageSize * pageNumber - 1;
-    const array = localContext.default;
-    const page = array.slice(startIndex, endIndex);
-    console.log({ page });
-    setData([...localContext.default].slice(startIndex, endIndex));
-  }
-
-  React.useEffect(() => {
-    if (localContext) {
-      setData(localContext.default);
-      pagination();
-      setTotalPage(Math.ceil(localContext.default.length / pageSize));
-    }
-  }, [localContext, pageNumber]);
-  console.log({ totalPage });
+  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
+    localContext.default,
+    pageSize,
+  );
 
   return (
     <MainContent>
@@ -80,7 +63,7 @@ export const Home: React.FunctionComponent<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {(data || []).map((item, index) => (
+              {(currentData() || []).map((item, index) => (
                 <tr key={index}>
                   <td>{item.name}</td>
                   <td>{item.description}</td>
@@ -90,21 +73,29 @@ export const Home: React.FunctionComponent<Props> = () => {
               ))}
             </tbody>
           </Container>
-          {pageNumber > 1 && (
+          {currentPage > 1 && (
             <button
               onClick={e => {
                 e.preventDefault();
-                setPageNumber(pageNumber - 1);
+                prev();
               }}
             >
               Prev
             </button>
           )}
-          {pageNumber < totalPage && (
+          <button
+            onClick={e => {
+              e.preventDefault();
+              jump(2);
+            }}
+          >
+            2
+          </button>
+          {currentPage < maxPage && (
             <button
               onClick={e => {
                 e.preventDefault();
-                setPageNumber(pageNumber + 1);
+                next();
               }}
             >
               Next
