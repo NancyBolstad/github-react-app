@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Typography from '../../components/Typography';
 import MainContent from '../../components/MainContent';
@@ -19,10 +19,9 @@ export const Home: React.FunctionComponent<Props> = () => {
     pageSize,
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     history.push({
-      pathname: '/',
-      search: `&page=${currentPage}`,
+      pathname: `&page=${currentPage}`,
     });
   }, [currentPage, history]);
 
