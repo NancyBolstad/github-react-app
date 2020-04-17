@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import createFontStyles from '../../util/createFontStyles';
 import { Item } from '../../types/data';
 
 interface Props {
@@ -17,13 +18,16 @@ const Container = styled.table`
   tr:hover {
     background-color: #ddd;
   }
+
+  td {
+    text-align: center;
+  }
 `;
 
 const TableHeader = styled.th`
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4caf50;
+  padding: ${props => props.theme.spacing.xs}rem 0;
+  text-align: center;
+  background-color: ${props => props.theme.colors.secondary};
   color: white;
 `;
 

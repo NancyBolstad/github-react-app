@@ -59,7 +59,6 @@ export const SiteLogo = styled(HeaderNavLink)`
   color: white;
   font-weight: bold;
   font-size: 2rem;
-  text-shadow: 2px 2px;
 `;
 
 export const HeaderButton = styled(HeaderNavLink)`

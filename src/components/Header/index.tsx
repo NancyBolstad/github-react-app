@@ -46,15 +46,8 @@ const Header: React.FunctionComponent = () => {
                 }
               }}
             >
-              RAWG
+              Github API Table
             </SiteLogo>
-            {isDesktop && (
-              <HeaderNavLinkList>
-                <li>
-                  <HeaderNavLink to="/contact">Contact</HeaderNavLink>
-                </li>
-              </HeaderNavLinkList>
-            )}
           </HeaderMenuLeft>
           <HeaderMenuRight>
             <ModeSwitchButton onClick={() => toggleContrast()}>
@@ -66,45 +59,9 @@ const Header: React.FunctionComponent = () => {
               </span>
               <TogglerSlider mode={theme} />
             </ModeSwitchButton>
-            {!isDesktop && (
-              <MobileMenuIcon
-                variant="primary"
-                size="small"
-                onClick={e => {
-                  e.preventDefault();
-                  setIsMobileMenuOpen(!isMobileMenuOpen);
-                }}
-              >
-                {isMobileMenuOpen ? cross : hamburger}
-              </MobileMenuIcon>
-            )}
           </HeaderMenuRight>
         </HeaderNav>
       </HeaderWrapper>
-      {!isDesktop && isMobileMenuOpen && (
-        <MobileMenuWrapper>
-          <HeaderNavLink
-            to="/favorites"
-            onClick={e => {
-              e.preventDefault();
-              window.location.assign('/favorites');
-              setIsMobileMenuOpen(false);
-            }}
-          >
-            Favorites
-          </HeaderNavLink>
-          <HeaderNavLink
-            to="/contact"
-            onClick={e => {
-              e.preventDefault();
-              window.location.assign('/contact');
-              setIsMobileMenuOpen(false);
-            }}
-          >
-            Contact
-          </HeaderNavLink>
-        </MobileMenuWrapper>
-      )}
     </>
   );
 };
