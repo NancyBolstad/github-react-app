@@ -13,7 +13,6 @@ import {
   MobileMenuWrapper,
 } from './styles';
 import { ContrastContext } from '../../context/Contrast';
-import { Context } from '../../context/GlobalContext';
 import { hamburger, cross } from '../../util/icons';
 import useIsDesktop from '../../hooks/useIsDesktop';
 
