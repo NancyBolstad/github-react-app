@@ -19,7 +19,6 @@ import useIsDesktop from '../../hooks/useIsDesktop';
 
 const Header: React.FunctionComponent = () => {
   const { theme, toggleContrast } = React.useContext(ContrastContext);
-  const { favorites } = React.useContext(Context);
   const isDesktop = useIsDesktop();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState<boolean>(false);
 
@@ -52,9 +51,6 @@ const Header: React.FunctionComponent = () => {
             </SiteLogo>
             {isDesktop && (
               <HeaderNavLinkList>
-                <li>
-                  <HeaderNavLink to="/favorites">Favorites ({favorites.length})</HeaderNavLink>
-                </li>
                 <li>
                   <HeaderNavLink to="/contact">Contact</HeaderNavLink>
                 </li>
@@ -96,7 +92,7 @@ const Header: React.FunctionComponent = () => {
               setIsMobileMenuOpen(false);
             }}
           >
-            Favorites ({favorites.length})
+            Favorites
           </HeaderNavLink>
           <HeaderNavLink
             to="/contact"

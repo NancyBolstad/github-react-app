@@ -8,11 +8,18 @@ export const Footer: React.FC<Props> = () => {
   return (
     <FooterWrapper>
       <FooterContent>
-        <a href="https://rawg.io/" title="Go to RAWG Video Games ">
+        <a
+          href="
+        https://developer.github.com/v3/"
+          title="Go to Github Developer Page"
+          aria-label="Go to Github Developer Page"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Typography
             variant="b2"
             element="h6"
-            content="Developed with RAWG Video Games Database API"
+            content="Developed with TypeScript, React and Github API"
             isPrimaryColor
           />
         </a>

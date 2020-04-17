@@ -1,172 +1,113 @@
 //Auto transformation from Json to TypeScript: https://transform.tools/json-to-typescript
 
 export interface Root {
-    count: number;
-    next: string;
-    previous: any;
-    results: Result[];
-    seo_title: string;
-    seo_description: string;
-    seo_keywords: string;
-    seo_h1: string;
-    noindex: boolean;
-    nofollow: boolean;
-    description: string;
-    filters: Filters;
-    nofollow_collections: string[];
-  }
-  
-  export interface Result {
-    id: number;
-    slug: string;
-    name: string;
-    released: string;
-    tba: boolean;
-    background_image: string;
-    rating: number;
-    rating_top: number;
-    ratings: Rating[];
-    ratings_count: number;
-    reviews_text_count: number;
-    added: number;
-    added_by_status: AddedByStatus;
-    metacritic?: number;
-    playtime: number;
-    suggestions_count: number;
-    user_game: any;
-    reviews_count: number;
-    saturated_color: string;
-    dominant_color: string;
-    platforms: Platform[];
-    parent_platforms: ParentPlatform[];
-    genres: Genre[];
-    stores: Store[];
-    clip: Clip;
-    tags: Tag[];
-    short_screenshots: ShortScreenshot[];
-  }
-  
-  export interface Rating {
-    id: number;
-    title: string;
-    count: number;
-    percent: number;
-  }
-  
-  export interface AddedByStatus {
-    yet: number;
-    owned: number;
-    beaten: number;
-    toplay: number;
-    dropped: number;
-    playing: number;
-  }
-  
-  export interface Platform {
-    platform: Platform2;
-    released_at: string;
-    requirements_en?: RequirementsEn;
-    requirements_ru?: RequirementsRu;
-  }
-  
-  export interface Platform2 {
-    id: number;
-    name: string;
-    slug: string;
-    image: any;
-    year_end: any;
-    year_start: any;
-    games_count: number;
-    image_background: string;
-  }
-  
-  export interface RequirementsEn {
-    minimum: string;
-    recommended?: string;
-  }
-  
-  export interface RequirementsRu {
-    minimum: string;
-    recommended: string;
-  }
-  
-  export interface ParentPlatform {
-    platform: Platform3;
-  }
-  
-  export interface Platform3 {
-    id: number;
-    name: string;
-    slug: string;
-  }
-  
-  export interface Genre {
-    id: number;
-    name: string;
-    slug: string;
-    games_count: number;
-    image_background: string;
-  }
-  
-  export interface Store {
-    id: number;
-    store: Store2;
-    url_en: string;
-    url_ru?: string;
-  }
-  
-  export interface Store2 {
-    id: number;
-    name: string;
-    slug: string;
-    domain: string;
-    games_count: number;
-    image_background: string;
-  }
-  
-  export interface Clip {
-    clip: string;
-    clips: Clips;
-    video: string;
-    preview: string;
-  }
-  
-  export interface Clips {
-    "320": string;
-    "640": string;
-    full: string;
-  }
-  
-  export interface Tag {
-    id: number;
-    name: string;
-    slug: string;
-    language: string;
-    games_count: number;
-    image_background: string;
-  }
-  
-  export interface ShortScreenshot {
-    id: number;
-    image: string;
-  }
-  
-  export interface Filters {
-    years: Year[];
-  }
-  
-  export interface Year {
-    from: number;
-    to: number;
-    filter: string;
-    decade: number;
-    years: Year2[];
-    nofollow: boolean;
-    count: number;
-  }
-  
-  export interface Year2 {
-    year: number;
-    count: number;
-    nofollow: boolean;
-  }
+  total_count: number;
+  incomplete_results: boolean;
+  items: Item[];
+}
+
+export interface Item {
+  id: number;
+  node_id: string;
+  name: string;
+  full_name: string;
+  private: boolean;
+  owner: Owner;
+  html_url: string;
+  description: string;
+  fork: boolean;
+  url: string;
+  forks_url: string;
+  keys_url: string;
+  collaborators_url: string;
+  teams_url: string;
+  hooks_url: string;
+  issue_events_url: string;
+  events_url: string;
+  assignees_url: string;
+  branches_url: string;
+  tags_url: string;
+  blobs_url: string;
+  git_tags_url: string;
+  git_refs_url: string;
+  trees_url: string;
+  statuses_url: string;
+  languages_url: string;
+  stargazers_url: string;
+  contributors_url: string;
+  subscribers_url: string;
+  subscription_url: string;
+  commits_url: string;
+  git_commits_url: string;
+  comments_url: string;
+  issue_comment_url: string;
+  contents_url: string;
+  compare_url: string;
+  merges_url: string;
+  archive_url: string;
+  downloads_url: string;
+  issues_url: string;
+  pulls_url: string;
+  milestones_url: string;
+  notifications_url: string;
+  labels_url: string;
+  releases_url: string;
+  deployments_url: string;
+  created_at: string;
+  updated_at: string;
+  pushed_at: string;
+  git_url: string;
+  ssh_url: string;
+  clone_url: string;
+  svn_url: string;
+  homepage?: string;
+  size: number;
+  stargazers_count: number;
+  watchers_count: number;
+  language: string;
+  has_issues: boolean;
+  has_projects: boolean;
+  has_downloads: boolean;
+  has_wiki: boolean;
+  has_pages: boolean;
+  forks_count: number;
+  mirror_url: any;
+  archived: boolean;
+  disabled: boolean;
+  open_issues_count: number;
+  license?: License;
+  forks: number;
+  open_issues: number;
+  watchers: number;
+  default_branch: string;
+  score: number;
+}
+
+export interface Owner {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_id: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: string;
+  site_admin: boolean;
+}
+
+export interface License {
+  key: string;
+  name: string;
+  spdx_id: string;
+  url?: string;
+  node_id: string;
+}
