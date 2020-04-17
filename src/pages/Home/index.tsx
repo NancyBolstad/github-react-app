@@ -1,33 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 import Typography from '../../components/Typography';
 import MainContent from '../../components/MainContent';
 import { Context } from '../../context/GlobalContext';
 import Loader from '../../components/Loader';
 import usePagination from '../../hooks/usePagination';
+import Table from '../../components/Table';
+import PaginateButtons from '../../components/PaginateButtons';
 
 interface Props {}
-
-const Container = styled.table`
-  border-collapse: collapse;
-  width: 1080px;
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  tr:hover {
-    background-color: #ddd;
-  }
-`;
-
-const TableHeader = styled.th`
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4caf50;
-  color: white;
-`;
 
 export const Home: React.FunctionComponent<Props> = () => {
   const localContext = React.useContext(Context);
@@ -53,54 +33,15 @@ export const Home: React.FunctionComponent<Props> = () => {
         <Loader />
       ) : (
         <div>
-          <Container>
-            <thead>
-              <tr>
-                <TableHeader>Name</TableHeader>
-                <TableHeader>Description</TableHeader>
-                <TableHeader>Forks</TableHeader>
-                <TableHeader>License</TableHeader>
-              </tr>
-            </thead>
-            <tbody>
-              {(currentData() || []).map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>{item.description}</td>
-                  <td>{item.forks}</td>
-                  <td>{item.license?.name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Container>
-          {currentPage > 1 && (
-            <button
-              onClick={e => {
-                e.preventDefault();
-                prev();
-              }}
-            >
-              Prev
-            </button>
-          )}
-          <button
-            onClick={e => {
-              e.preventDefault();
-              jump(2);
-            }}
-          >
-            2
-          </button>
-          {currentPage < maxPage && (
-            <button
-              onClick={e => {
-                e.preventDefault();
-                next();
-              }}
-            >
-              Next
-            </button>
-          )}
+          <Table rows={currentData()} />
+          <PaginateButtons
+            totalPages={maxPage}
+            preHandler={prev}
+            nextHandler={next}
+            jumpHandler={jump}
+            displayNext={currentPage < maxPage}
+            displayPrev={currentPage > 1}
+          />
         </div>
       )}
     </MainContent>
