@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import Typography from '../../components/Typography';
 import MainContent from '../../components/MainContent';
 import { Context } from '../../context/GlobalContext';
@@ -11,11 +12,19 @@ interface Props {}
 
 export const Home: React.FunctionComponent<Props> = () => {
   const localContext = React.useContext(Context);
+  let history = useHistory();
   const pageSize = 20;
   const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
     localContext.default,
     pageSize,
   );
+
+  React.useEffect(() => {
+    history.push({
+      pathname: '/',
+      search: `&page=${currentPage}`,
+    });
+  }, [currentPage, history]);
 
   return (
     <MainContent>
