@@ -1,5 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
 import Button from '../../components/Button';
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+
+  button {
+    width: 32px;
+  }
+`;
 
 interface Props {
   totalPages: number;
@@ -18,13 +27,13 @@ export const PaginateButtons: React.FunctionComponent<Props> = ({
   displayNext,
   displayPrev,
 }) => {
-  const pageNumbers = [];
+  const pageNumbers: number[] = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
 
   return (
-    <div>
+    <ButtonsWrapper>
       {displayPrev && (
         <Button
           size="small"
@@ -62,7 +71,7 @@ export const PaginateButtons: React.FunctionComponent<Props> = ({
           Next
         </Button>
       )}
-    </div>
+    </ButtonsWrapper>
   );
 };
 
