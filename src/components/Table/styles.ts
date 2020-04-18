@@ -3,6 +3,7 @@ import createFontStyles from '../../util/createFontStyles';
 
 const StyledTable = styled.table`
   border-collapse: collapse;
+  margin: 3rem auto;
 `;
 
 const TableHeader = styled.th`
@@ -22,7 +23,7 @@ const TableRow = styled.tr`
   }
 
   &:hover {
-    background-color: #ddd;
+    opacity: 0.8;
   }
 `;
 

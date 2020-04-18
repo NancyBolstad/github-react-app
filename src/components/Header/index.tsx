@@ -18,11 +18,7 @@ const Header: React.FunctionComponent = () => {
       <HeaderWrapper>
         <HeaderNav>
           <HeaderMenuLeft>
-            <SiteLogo
-              to="/"
-            >
-              Github API Table
-            </SiteLogo>
+            <SiteLogo to="/">Universitetsforlaget Test</SiteLogo>
           </HeaderMenuLeft>
           <HeaderMenuRight>
             <ModeSwitchButton onClick={() => toggleContrast()}>
