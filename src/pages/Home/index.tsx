@@ -1,36 +1,29 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Typography from '../../components/Typography';
 import MainContent from '../../components/MainContent';
 import { Context } from '../../context/GlobalContext';
 import Loader from '../../components/Loader';
+import usePagination from '../../hooks/usePagination';
+import Table from '../../components/Table';
+import PaginateButtons from '../../components/PaginateButtons';
 
 interface Props {}
 
-const Container = styled.table`
-  border-collapse: collapse;
-  width: 100%;
-
-  tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-
-  tr:hover {
-    background-color: #ddd;
-  }
-`;
-
-const TableHeader = styled.th`
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4caf50;
-  color: white;
-`;
-
 export const Home: React.FunctionComponent<Props> = () => {
   const localContext = React.useContext(Context);
-  console.log({ localContext });
+  let history = useHistory();
+  const pageSize = 20;
+  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
+    localContext.default,
+    pageSize,
+  );
+
+  useEffect(() => {
+    history.push({
+      pathname: `&page=${currentPage}`,
+    });
+  }, [currentPage, history]);
 
   return (
     <MainContent>
@@ -47,26 +40,17 @@ export const Home: React.FunctionComponent<Props> = () => {
       {localContext.loaded ? (
         <Loader />
       ) : (
-        <Container>
-          <thead>
-            <tr>
-              <TableHeader>Name</TableHeader>
-              <TableHeader>Description</TableHeader>
-              <TableHeader>Forks</TableHeader>
-              <TableHeader>License</TableHeader>
-            </tr>
-          </thead>
-          <tbody>
-          {(localContext.default || []).map((item, index) => (
-            <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.description}</td>
-              <td>{item.forks}</td>
-              <td>{item.license?.name}</td>
-            </tr>
-          ))}
-          </tbody>
-        </Container>
+        <div>
+          <Table rows={currentData()} />
+          <PaginateButtons
+            totalPages={maxPage}
+            preHandler={prev}
+            nextHandler={next}
+            jumpHandler={jump}
+            displayNext={currentPage < maxPage}
+            displayPrev={currentPage > 1}
+          />
+        </div>
       )}
     </MainContent>
   );

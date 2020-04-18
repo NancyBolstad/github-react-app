@@ -9,8 +9,7 @@ export const Footer: React.FC<Props> = () => {
     <FooterWrapper>
       <FooterContent>
         <a
-          href="
-        https://developer.github.com/v3/"
+          href="https://developer.github.com/v3/"
           title="Go to Github Developer Page"
           aria-label="Go to Github Developer Page"
           target="_blank"
@@ -19,7 +18,7 @@ export const Footer: React.FC<Props> = () => {
           <Typography
             variant="b2"
             element="h6"
-            content="Developed with TypeScript, React and Github API"
+            content="Developed with Github API"
             isPrimaryColor
           />
         </a>
