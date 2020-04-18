@@ -3,7 +3,7 @@ import createFontStyles from '../../util/createFontStyles';
 
 const StyledTable = styled.table`
   border-collapse: collapse;
-  margin: 3rem auto;
+  margin: ${props => props.theme.spacing.l}rem auto;
 `;
 
 const TableHeader = styled.th`
