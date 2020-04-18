@@ -4,32 +4,14 @@ import {
   HeaderNav,
   HeaderMenuLeft,
   HeaderMenuRight,
-  HeaderNavLinkList,
-  HeaderNavLink,
   SiteLogo,
   ModeSwitchButton,
   TogglerSlider,
-  MobileMenuIcon,
-  MobileMenuWrapper,
 } from './styles';
 import { ContrastContext } from '../../context/Contrast';
-import { hamburger, cross } from '../../util/icons';
-import useIsDesktop from '../../hooks/useIsDesktop';
 
 const Header: React.FunctionComponent = () => {
   const { theme, toggleContrast } = React.useContext(ContrastContext);
-  const isDesktop = useIsDesktop();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState<boolean>(false);
-
-  React.useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = 'hidden';
-
-      return () => {
-        document.body.style.overflow = 'unset';
-      };
-    }
-  }, [isMobileMenuOpen]);
 
   return (
     <>
@@ -38,13 +20,6 @@ const Header: React.FunctionComponent = () => {
           <HeaderMenuLeft>
             <SiteLogo
               to="/"
-              onClick={e => {
-                if (!isDesktop) {
-                  e.preventDefault();
-                  window.location.assign('/');
-                  setIsMobileMenuOpen(false);
-                }
-              }}
             >
               Github API Table
             </SiteLogo>
