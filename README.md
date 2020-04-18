@@ -1,12 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/073cbc06-47d5-4002-998e-48d2169366cb/deploy-status)](https://app.netlify.com/sites/agitated-kilby-44b818/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d5eb84aa-29ac-4e01-b258-c9b496a3f875/deploy-status)](https://app.netlify.com/sites/universitetsforlaget-test/deploys)
 
-## :satellite: Search RAWG Video Games
+## :satellite: Github API Table
 
 ### Deploy:
 
-https://agitated-kilby-44b818.netlify.com/
+https://universitetsforlaget-test.netlify.app
 
 ## :paperclip: Available Scripts
 
@@ -35,20 +35,6 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
-### `yarn deploy`
-
-Deploy the app on GitHub Pages site. This requires to include information about the homepage's URL in the package.json file.
-
-For example:
-"homepage": "http://gitname.github.io/noroff-react-ma3",
-
 ### `yarn eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-# github-react-app
