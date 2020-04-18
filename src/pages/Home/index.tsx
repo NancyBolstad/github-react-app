@@ -30,7 +30,7 @@ export const Home: React.FunctionComponent<Props> = () => {
       <Typography
         element="h1"
         variant="h1"
-        content="Github API Table"
+        content="Github's Most Popular JavaScript-repos"
         bottom={32}
         top={32}
         bottomDesktop={48}
