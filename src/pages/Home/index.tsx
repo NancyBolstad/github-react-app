@@ -7,16 +7,16 @@ import Loader from '../../components/Loader';
 import usePagination from '../../hooks/usePagination';
 import Table from '../../components/Table';
 import PaginateButtons from '../../components/PaginateButtons';
+import { PAGE_SIZE } from '../../util/constants';
 
 interface Props {}
 
 export const Home: React.FunctionComponent<Props> = () => {
   const localContext = React.useContext(Context);
   let history = useHistory();
-  const pageSize = 20;
   const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
     localContext.default,
-    pageSize,
+    PAGE_SIZE,
   );
 
   useEffect(() => {
