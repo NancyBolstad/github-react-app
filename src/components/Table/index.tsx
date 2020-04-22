@@ -2,29 +2,43 @@ import React from 'react';
 import { Item } from '../../types/data';
 import { StyledTable, TableHeader, TableRow, TableDataCell } from './styles';
 
+type KeyName = keyof Item;
+
 interface Props {
+  headerNames: KeyName[];
   rows: Item[];
+  sortMethod: (columnName: string) => any;
 }
 
-export const Table: React.FunctionComponent<Props> = ({ rows }) => {
+export const Table: React.FunctionComponent<Props> = ({ headerNames, rows, sortMethod }) => {
+  const [isSorted, setIsSorted] = React.useState(false);
   return (
     <>
       <StyledTable>
         <thead>
           <TableRow>
-            <TableHeader>Name</TableHeader>
-            <TableHeader>Description</TableHeader>
-            <TableHeader>Forks</TableHeader>
-            <TableHeader>License</TableHeader>
+            {(headerNames || []).map((headerName, index) => (
+              <TableHeader>
+                <TableDataCell
+                  key={index}
+                  onClick={e => {
+                    e.preventDefault();
+                    setIsSorted(true);
+                    sortMethod(headerName);
+                  }}
+                >
+                  {headerName}
+                </TableDataCell>
+              </TableHeader>
+            ))}
           </TableRow>
         </thead>
         <tbody>
-          {(rows || []).map((item, index) => (
+          {(rows || []).map((item: Item, index) => (
             <TableRow key={index}>
-              <TableDataCell>{item.name}</TableDataCell>
-              <TableDataCell>{item.description}</TableDataCell>
-              <TableDataCell>{item.forks}</TableDataCell>
-              <TableDataCell>{item.license?.name}</TableDataCell>
+              {(headerNames || []).map((headerName, index) => (
+                <TableDataCell key={index}>{item[headerName]}</TableDataCell>
+              ))}
             </TableRow>
           ))}
         </tbody>

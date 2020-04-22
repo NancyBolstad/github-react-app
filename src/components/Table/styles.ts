@@ -9,6 +9,7 @@ const StyledTable = styled.table`
 const TableHeader = styled.th`
   padding: ${props => props.theme.spacing.xs}rem 0;
   height: 3.25rem;
+  width: 3rem;
   text-align: center;
   background-color: ${props => props.theme.colors.secondary};
   color: white;
