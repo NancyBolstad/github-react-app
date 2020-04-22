@@ -12,8 +12,6 @@ interface Props {
 export const Table: React.FunctionComponent<Props> = ({ headerNames, rows }) => {
   const [removed, setRemoved] = React.useState<number[]>([]);
 
-  console.log({ removed });
-
   return (
     <>
       <StyledTable>
