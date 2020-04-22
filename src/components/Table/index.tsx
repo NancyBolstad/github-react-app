@@ -1,17 +1,19 @@
 import React from 'react';
 import { Item } from '../../types/data';
-import { StyledTable, TableHeader, TableRow, TableDataCell } from './styles';
+import { StyledTable, TableHeader, TableRow, TableDataCell, RemovableRow } from './styles';
 
 type KeyName = keyof Item;
 
 interface Props {
   headerNames: KeyName[];
   rows: Item[];
-  sortMethod: (columnName: string) => any;
 }
 
-export const Table: React.FunctionComponent<Props> = ({ headerNames, rows, sortMethod }) => {
-  const [isSorted, setIsSorted] = React.useState(false);
+export const Table: React.FunctionComponent<Props> = ({ headerNames, rows }) => {
+  const [removed, setRemoved] = React.useState<number[]>([]);
+
+  console.log({ removed });
+
   return (
     <>
       <StyledTable>
@@ -19,27 +21,29 @@ export const Table: React.FunctionComponent<Props> = ({ headerNames, rows, sortM
           <TableRow>
             {(headerNames || []).map((headerName, index) => (
               <TableHeader>
-                <TableDataCell
-                  key={index}
-                  onClick={e => {
-                    e.preventDefault();
-                    setIsSorted(true);
-                    sortMethod(headerName);
-                  }}
-                >
-                  {headerName}
-                </TableDataCell>
+                <TableDataCell key={index}>{headerName}</TableDataCell>
               </TableHeader>
             ))}
+            <TableHeader>Delete</TableHeader>
           </TableRow>
         </thead>
         <tbody>
           {(rows || []).map((item: Item, index) => (
-            <TableRow key={index}>
+            <RemovableRow key={index} hidden={removed.includes(item.id)}>
               {(headerNames || []).map((headerName, index) => (
                 <TableDataCell key={index}>{item[headerName]}</TableDataCell>
               ))}
-            </TableRow>
+              <TableDataCell key={index}>
+                <button
+                  onClick={e => {
+                    e.preventDefault();
+                    setRemoved([...removed, item.id]);
+                  }}
+                >
+                  Delete
+                </button>
+              </TableDataCell>
+            </RemovableRow>
           ))}
         </tbody>
       </StyledTable>

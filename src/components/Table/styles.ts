@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import createFontStyles from '../../util/createFontStyles';
 
 const StyledTable = styled.table`
@@ -28,6 +28,14 @@ const TableRow = styled.tr`
   }
 `;
 
+const RemovableRow = styled(TableRow)<{ hidden: boolean }>`
+  ${props =>
+    props.hidden === true &&
+    css`
+      display: none;
+    `};
+`;
+
 const TableDataCell = styled.td`
   text-align: center;
   height: 100%;
@@ -35,4 +43,4 @@ const TableDataCell = styled.td`
   padding: ${props => props.theme.spacing.s}rem;
 `;
 
-export { StyledTable, TableHeader, TableRow, TableDataCell };
+export { StyledTable, TableHeader, TableRow, TableDataCell, RemovableRow };

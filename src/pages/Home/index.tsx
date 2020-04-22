@@ -25,10 +25,6 @@ export const Home: React.FunctionComponent<Props> = () => {
     });
   }, [currentPage, history]);
 
-  function sort(value: string) {
-    console.log(value);
-  }
-
   return (
     <MainContent>
       <Typography
@@ -45,11 +41,7 @@ export const Home: React.FunctionComponent<Props> = () => {
         <Loader />
       ) : (
         <div>
-          <Table
-            headerNames={['name', 'forks', 'description']}
-            rows={currentData()}
-            sortMethod={sort}
-          />
+          <Table headerNames={['name', 'forks', 'description']} rows={currentData()} />
           <PaginateButtons
             totalPages={maxPage}
             preHandler={prev}
