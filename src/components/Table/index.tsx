@@ -10,8 +10,6 @@ interface Props {
 }
 
 export const Table: React.FunctionComponent<Props> = ({ headerNames, rows }) => {
-  const [removed, setRemoved] = React.useState<number[]>([]);
-
   return (
     <>
       <StyledTable>
@@ -22,25 +20,20 @@ export const Table: React.FunctionComponent<Props> = ({ headerNames, rows }) => 
                 <TableDataCell key={index}>{headerName}</TableDataCell>
               </TableHeader>
             ))}
-            <TableHeader>Delete</TableHeader>
           </TableRow>
         </thead>
         <tbody>
           {(rows || []).map((item: Item, index) => (
-            <RemovableRow key={index} hidden={removed.includes(item.id)}>
-              {(headerNames || []).map((headerName, index) => (
-                <TableDataCell key={index}>{item[headerName]}</TableDataCell>
-              ))}
-              <TableDataCell key={index}>
-                <button
-                  onClick={e => {
-                    e.preventDefault();
-                    setRemoved([...removed, item.id]);
-                  }}
-                >
-                  Delete
-                </button>
-              </TableDataCell>
+            <RemovableRow key={index}>
+              {(headerNames || []).map((headerName, index) => {
+                if (headerName === 'owner') {
+                  return <TableDataCell key={index}>{item.owner.node_id}</TableDataCell>;
+                } else if (headerName === 'license') {
+                  return <TableDataCell key={index}>{item.license?.name}</TableDataCell>;
+                } else {
+                  return <TableDataCell key={index}>{item[headerName]}</TableDataCell>;
+                }
+              })}
             </RemovableRow>
           ))}
         </tbody>

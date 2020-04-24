@@ -3,6 +3,7 @@ import createFontStyles from '../../util/createFontStyles';
 
 const StyledTable = styled.table`
   border-collapse: collapse;
+  width: 100%;
   margin: ${props => props.theme.spacing.l}rem auto;
 `;
 
@@ -28,7 +29,7 @@ const TableRow = styled.tr`
   }
 `;
 
-const RemovableRow = styled(TableRow)<{ hidden: boolean }>`
+const RemovableRow = styled(TableRow)<{ hidden?: boolean }>`
   ${props =>
     props.hidden === true &&
     css`

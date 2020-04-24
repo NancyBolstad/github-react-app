@@ -39,7 +39,7 @@ export const Home: React.FunctionComponent<Props> = () => {
         <Loader />
       ) : (
         <>
-          <Table headerNames={['name', 'forks', 'description']} rows={currentData()} />
+          <Table headerNames={['name', 'forks', 'description', 'license']} rows={currentData()} />
           <PaginateButtons
             totalPages={maxPage}
             preHandler={prev}

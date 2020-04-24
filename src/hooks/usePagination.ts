@@ -29,7 +29,7 @@ function usePagination(data: Item[], itemsPerPage: number, currentPage: number, 
     updatePage(Math.min(pageNumber, maxPage));
   }
 
-  return { next, prev, jump, currentData, maxPage };
+  return { next, prev, jump, currentData };
 }
 
 export default usePagination;
