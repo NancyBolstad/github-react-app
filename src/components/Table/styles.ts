@@ -38,7 +38,6 @@ const RemovableRow = styled(TableRow)<{ hidden?: boolean }>`
 `;
 
 const TableDataCell = styled.td`
-  text-align: center;
   height: 100%;
   min-height: 6.25rem;
   padding: ${props => props.theme.spacing.s}rem;
