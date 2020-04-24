@@ -1,30 +1,35 @@
-import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Item } from '../types/data';
 
-function usePagination(data: Item[], itemsPerPage: number) {
-  const [currentPage, setCurrentPage] = useState(1);
-  const maxPage = Math.ceil(data.length / itemsPerPage);
-
+function usePagination(data: Item[], itemsPerPage: number, currentPage: number, maxPage: number) {
+  const history = useHistory();
   function currentData(): Item[] {
     const begin = (currentPage - 1) * itemsPerPage;
     const end = begin + itemsPerPage;
     return data.slice(begin, end);
   }
 
+  function updatePage(pageNumber: number) {
+    history.push(`/${pageNumber <= maxPage ? pageNumber : 1}`);
+  }
+
   function next(): void {
-    setCurrentPage(currentPage => Math.min(currentPage + 1, maxPage));
+    const newPage: number = Math.min(currentPage + 1, maxPage);
+    updatePage(newPage);
   }
 
   function prev(): void {
-    setCurrentPage(currentPage => Math.max(currentPage - 1, 1));
+    const newPage = Math.max(currentPage - 1, 1);
+    updatePage(newPage);
   }
 
   function jump(page: number) {
     const pageNumber = Math.max(1, page);
-    setCurrentPage(currentPage => Math.min(pageNumber, maxPage));
+
+    updatePage(Math.min(pageNumber, maxPage));
   }
 
-  return { next, prev, jump, currentData, currentPage, maxPage };
+  return { next, prev, jump, currentData, maxPage };
 }
 
 export default usePagination;

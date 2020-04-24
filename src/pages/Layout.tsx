@@ -17,7 +17,12 @@ const Layout: React.FunctionComponent<Props> = () => {
           <div>
             <Header />
             <Switch>
-              <Route path="/">
+              <Route exact path="/">
+                <Suspense fallback={<Loader />}>
+                  <Home />
+                </Suspense>
+              </Route>
+              <Route exact path="/:number">
                 <Suspense fallback={<Loader />}>
                   <Home />
                 </Suspense>

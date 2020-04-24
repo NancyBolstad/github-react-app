@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import Typography from '../../components/Typography';
 import MainContent from '../../components/MainContent';
 import { Context } from '../../context/GlobalContext';
@@ -12,18 +12,16 @@ import { PAGE_SIZE } from '../../util/constants';
 interface Props {}
 
 export const Home: React.FunctionComponent<Props> = () => {
+  const { number = '1' } = useParams();
   const localContext = React.useContext(Context);
-  let history = useHistory();
-  const { next, prev, jump, currentData, currentPage, maxPage } = usePagination(
+  const maxPage = Math.ceil(localContext.default.length / PAGE_SIZE);
+  const currentPage = parseInt(number) <= maxPage && parseInt(number) > 0 ? parseInt(number) : 1;
+  const { next, prev, jump, currentData } = usePagination(
     localContext.default,
     PAGE_SIZE,
+    currentPage,
+    maxPage,
   );
-
-  useEffect(() => {
-    history.push({
-      pathname: `&page=${currentPage}`,
-    });
-  }, [currentPage, history]);
 
   return (
     <MainContent>
@@ -40,7 +38,7 @@ export const Home: React.FunctionComponent<Props> = () => {
       {localContext.loaded ? (
         <Loader />
       ) : (
-        <div>
+        <>
           <Table headerNames={['name', 'forks', 'description']} rows={currentData()} />
           <PaginateButtons
             totalPages={maxPage}
@@ -49,8 +47,9 @@ export const Home: React.FunctionComponent<Props> = () => {
             jumpHandler={jump}
             displayNext={currentPage < maxPage}
             displayPrev={currentPage > 1}
+            currentPage={currentPage}
           />
-        </div>
+        </>
       )}
     </MainContent>
   );

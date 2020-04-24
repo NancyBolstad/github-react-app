@@ -9,6 +9,7 @@ interface Props {
   jumpHandler: (pageNumber: number) => any;
   displayPrev: boolean;
   displayNext: boolean;
+  currentPage: number;
 }
 
 export const PaginateButtons: React.FunctionComponent<Props> = ({
@@ -18,16 +19,12 @@ export const PaginateButtons: React.FunctionComponent<Props> = ({
   jumpHandler,
   displayNext,
   displayPrev,
+  currentPage,
 }) => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
   const pageNumbers: number[] = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
   }
-
-  React.useEffect(() => {
-    setActiveIndex(1);
-  }, []);
 
   return (
     <ButtonsWrapper>
@@ -51,14 +48,13 @@ export const PaginateButtons: React.FunctionComponent<Props> = ({
           key={index}
           size="small"
           variant="secondary"
-          isActive={index === activeIndex - 1}
+          isActive={index === currentPage - 1}
           aria-label={`Page ${number}`}
           title={`Page ${number}`}
           href="#"
           onClick={e => {
             e.preventDefault();
             jumpHandler(number);
-            setActiveIndex(number);
           }}
         >
           {number}
